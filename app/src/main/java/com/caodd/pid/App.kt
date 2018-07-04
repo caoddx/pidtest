@@ -16,9 +16,10 @@ class App : Application() {
     }
 
     private fun initLog() {
+        val tag ="CAODD"
 
         val fs = CsvFormatStrategy.newBuilder()
-                .tag("SOFU-SMART")
+                .tag(tag)
                 .dateFormat(SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA))
                 .build()
 
@@ -31,7 +32,7 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
 
             val fs2 = PrettyFormatStrategy.newBuilder()
-                    .tag("SOFU-SMART")
+                    .tag(tag)
                     .methodOffset(5)
                     .methodCount(2)
                     .logStrategy(object : LogcatLogStrategy() {
@@ -71,7 +72,7 @@ class App : Application() {
             try {
                 Timber.e(e, "uncaught exception in thread ${t.name}")
             } catch (ex: Exception) {
-                Log.wtf("SOFU-SMART", "UncaughtException Timber log failure", ex)
+                Log.wtf(tag, "UncaughtException Timber log failure", ex)
             }
 
             defaultHandler.uncaughtException(t, e)
