@@ -8,93 +8,202 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lineChart"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editKp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:inputType="numberDecimal"
-        android:text="1.0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
-
-    <EditText
-        android:id="@+id/editTi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:inputType="numberDecimal"
-        android:text="1.0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
-
-    <EditText
-        android:id="@+id/editTd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:inputType="numberDecimal"
-        android:text="1.0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="kp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editKp"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="ti"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editKp"
-        app:layout_constraintStart_toEndOf="@+id/editKp" />
-
-
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="td"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTi"
-        app:layout_constraintStart_toEndOf="@+id/editTi" />
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        tools:layout_editor_absoluteX="0dp">
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="kp"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editKp"
+            app:layout_constraintEnd_toStartOf="@+id/editKp" />
+
+        <Button
+            android:id="@+id/buttonKdMinus"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="↓"
+            app:layout_constraintStart_toStartOf="@+id/buttonKdPlus"
+            app:layout_constraintTop_toBottomOf="@+id/editKd" />
+
+        <EditText
+            android:id="@+id/editKp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:inputType="numberDecimal"
+            android:text="1"
+            app:layout_constraintEnd_toEndOf="@+id/buttonKpPlus"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/buttonKpPlus"
+            app:layout_constraintTop_toBottomOf="@+id/buttonKpPlus" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="ki"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editKi"
+            app:layout_constraintEnd_toStartOf="@+id/editKi" />
+
+        <Button
+            android:id="@+id/buttonKiPlus"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:text="↑"
+            app:layout_constraintEnd_toStartOf="@+id/buttonKdPlus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonKpPlus"
+            app:layout_constraintTop_toTopOf="@+id/buttonKpPlus" />
+
+        <Button
+            android:id="@+id/buttonKpPlus"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="↑"
+            app:layout_constraintEnd_toStartOf="@+id/buttonKiPlus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lineChart" />
+
+        <Button
+            android:id="@+id/buttonKpMinus"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="↓"
+            app:layout_constraintStart_toStartOf="@+id/buttonKpPlus"
+            app:layout_constraintTop_toBottomOf="@+id/editKp" />
+
+        <Button
+            android:id="@+id/buttonKiMinus"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="↓"
+            app:layout_constraintStart_toStartOf="@+id/buttonKiPlus"
+            app:layout_constraintTop_toBottomOf="@+id/editKi" />
+
+        <EditText
+            android:id="@+id/editKd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:inputType="numberDecimal"
+            android:text="1"
+            app:layout_constraintEnd_toEndOf="@+id/buttonKdPlus"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/buttonKdPlus"
+            app:layout_constraintTop_toBottomOf="@+id/buttonKdPlus" />
+
+        <Button
+            android:id="@+id/buttonKdPlus"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:text="↑"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonKiPlus"
+            app:layout_constraintTop_toTopOf="@+id/buttonKpPlus" />
+
+        <EditText
+            android:id="@+id/editKi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:inputType="numberDecimal"
+            android:text="1"
+            app:layout_constraintEnd_toEndOf="@+id/buttonKiPlus"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/buttonKiPlus"
+            app:layout_constraintTop_toBottomOf="@+id/buttonKiPlus" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="kd"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editKd"
+            app:layout_constraintEnd_toStartOf="@+id/editKd" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttonPlus"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="→"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button" />
+
+    <Button
+        android:id="@+id/buttonMinus"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTd"
-        app:layout_constraintStart_toEndOf="@+id/editTd" />
+        android:text="←"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextPlus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:inputType="numberDecimal"
+        android:text="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPlus"
+        app:layout_constraintStart_toEndOf="@+id/buttonMinus"
+        app:layout_constraintTop_toTopOf="@+id/buttonMinus" />
+
+
 </android.support.constraint.ConstraintLayout>
