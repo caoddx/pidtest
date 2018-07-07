@@ -2,6 +2,7 @@ package com.caodd.pid
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -20,7 +21,8 @@ class MainActivity : AppCompatActivity() {
             "histories" to Color.RED,
             "valves" to Color.BLUE,
             "outs" to Color.GREEN,
-            "sums" to Color.BLACK
+            "sums" to Color.BLACK,
+            "targets" to Color.MAGENTA
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
 
         var plus = editTextPlus.text.toString().toFloat()
+        Handler().postDelayed({
+            plus = editTextPlus.text.toString().toFloat()
+        }, 50)
 
         buttonMinus.setOnClickListener {
             plus -= 0.1f
@@ -73,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             val ti = editKi.text.toString().toFloat()
             val td = editKd.text.toString().toFloat()
 
-            // 10 8 1
             val pid: Pid = SimplifyPositionPid(kp, ti, td)
 
             val setMap = updateMap(pid)
@@ -96,17 +100,19 @@ class MainActivity : AppCompatActivity() {
         val vs = LinkedList<Float>()
 
         for (i in 0..19) {
-            vs.offer(0.5f)
+            //vs.offer(0.5f)
         }
 
-        val map = update(pid, 1f, 1f) { current, valve ->
-            vs.offer(valve)
-            current + (vs.poll() - 0.5f) * 0.1f
+        val map = update(pid, 1f, 1f, 1f) { current, valve ->
+            vs.offer(valve - 0.2f)
+            // current + (vs.poll() - 0.5f) * 0.1f
+            current + (vs.poll() - current) * 0.1f
         }
 
         return map.mapValues { (name, list) ->
             makeSet(name, list, colors[name]!!)
-        }.filter { it.key != "sums" }
+        }
+                //.filter { it.key != "sums" }
     }
 
     private fun update(pid: Pid, vararg targets: Float, applyValve: (current: Float, valve: Float) -> Float): Map<String, List<Float>> {
@@ -115,39 +121,35 @@ class MainActivity : AppCompatActivity() {
         val valves = mutableListOf<Float>()
         val outs = mutableListOf<Float>()
         val sums = mutableListOf<Float>()
+        val tgs = mutableListOf<Float>()
 
         var current = 0.0f
-        var valve = 0.0f
-        var out = 0f
+        var valve: Float
+        var out: Float
 
-        val upList: () -> Unit = {
-            histories.add(current)
-            valves.add(valve)
-            outs.add(out)
-            sums.add(pid.sum)
-        }
+        (floatArrayOf(current) + targets).forEachIndexed { index, target ->
 
-        for (i in 0..19) {
-            pid.updateError(0f)
-            out = pid.getOut()
-            valve = (out + 1) / 2
-            current = applyValve(current, valve)
-            upList()
-        }
-
-        targets.forEach {
-            val target = it
-
-            for (i in 0..299) {
+            if (index == 0) {
+                0..49
+            } else {
+                0..299
+            }.forEach {
                 pid.updateError(target - current)
                 out = pid.getOut()
                 valve = (out + 1) / 2
                 current = applyValve(current, valve)
-                upList()
+
+                histories.add(current)
+                valves.add(valve)
+                outs.add(out)
+                sums.add(pid.sum)
+                tgs.add(target)
             }
+
         }
 
         return mapOf(
+                "targets" to tgs,
                 "sums" to sums.toList(),
                 "valves" to valves.toList(),
                 "outs" to outs.toList(),
